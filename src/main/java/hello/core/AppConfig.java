@@ -12,10 +12,18 @@ public class AppConfig {
 
     public MemberService memberService() {
         //DI 생성자 주입
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    public MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    public FixDiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
     }
 }
