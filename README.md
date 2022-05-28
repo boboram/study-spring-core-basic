@@ -63,4 +63,19 @@
 - 또 XML을 사용하면 `컴파일 없이` 빈 설정 정보를 변경 할 수 있는 장점도 있으므로 한 번쯤 배워두는 것도 괜찮다.
 - `GenericXmlApplicationContext` 를 사용하면서 xml 설정 파일을 넘기면 된다.
 - xml 기반의 `appConfig.xml` 스프링 설정 정보와 자바 코드로 된 `AppConfig.java` 설정 정보를 비교해보면 거의 비슷하다는 것을 알 수 있다.
-- xml 기반으로 설정하는 것은 최근에 잘 사용하지 않으므로 이정도로 마무리
+- xml 기반으로 설정하는 것은 최근에 잘 사용하지 않으므로 이정도로 마무리 
+
+## 스프링 빈 설정 메타 정보 - BeanDefinition 
+- 스프링은 어떻게 이런 다양한 설정 형식을 지원하는 것일까? 그 중심에는 `BeanDefinition` 이라는 추상화가 있다.
+- 쉽게 이야기 해서 역할과 구현을 개념적으로 나눈 것
+  - XML 을 읽어서 BeanDefinition 을 만들면 됨
+  - 자바 코드를 읽어서 BeanDefinition 을 만들면 됨
+  - 스프링 컨테이너는 자바 코드인지, XML인지 몰라도 된다. 오직 BeanDefinition 만 알면 된다.
+- `BeanDefinition` 을 빈 설정 메타정보라 한다.
+  - `@Bean`, `<bean>` 당 각각 하나씩 메타 정보가 생성된다.
+- 스프링 컨테이너는 이 메타정보를 기반으로 스프링 빈을 생성한다.
+
+### BeanDefinition 정리
+- BeanDefinition 을 직접 생성해서 스프링 컨테이너에 등록할 수 도 있다. 
+  - 하지만 실무에서 BeanDefinition을 직접 정의하거나 사용할 일은 거의 없다. 
+- BeanDefinition 에 대해서는 너무 깊이있게 이해하기 보다는, 스프링이 다양한 형태의 설정 정보를 BeanDefinition 으로 `추상화 해서 사용하는 것` 정도만 이해하면 된다. 
