@@ -54,3 +54,9 @@
   - 필드 대신에 자바에서 공유되지 않는, 지역변수, 파라미터, ThreadLocal 등을 사용해야 한다.
 - 스프링 빈의 필드에 공융 값을 설정하면 정말 큰 장애가 발생할 수 있다!!
   - `StatefulServiceTest@statefulServiceSingleton`
+
+# @Configuration 과 싱글톤
+- `AppConfig`에서 
+  - @Bean memberService -> new MemoryMemberRepository()
+  - @Bean orderService -> new MemoryMemberRepository()
+  - 싱글톤이 안깨지나? => `ConfigurationSingletonTest`
