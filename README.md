@@ -18,13 +18,15 @@
 - ac.getBeanDefinitionNames() : 스프링에 등록된 모든 빈 이름 조회 
 - ac.getBean() : 빈 이름으로 빈 객체(인스턴스) 조회 
 - 애플리케이션 빈 출력
-  - getRole로 구분 가능
+  - getRole 로 구분 가능
   - ROLE_INFRASTRUCTURE : 스프링이 내부에서 사용하는 빈
   - ROLE_APPLICATION : 내가 직접 등록한 빈인지 확인 
 ### 스프링 빈 조회 - 동일한 타입이 둘 이상
+- `class ApplicationContextSameBeanFindTest`
 - 타입으로 조회시 같은 타입의 스프링 빈이 둘 이상이면 오류가 발생한다. 이때는 빈 이름을 지정하자.
 - `ac.getBeanOfType()`을 사용하면 해당 타입의 모든 빈을 조회할 수 있다.
 ### 스프링 빈 조회 - 상속관계 
+- `class ApplicationContextExtendsFindTest`
 - 부모 타입으로 조회하면, 자식 타입도 함께 조회된다.
   - 그래서 모든 자바 객체의 최고 부모인 `Object` 타입으로 조회하면, 모든 스프링 빈을 조회한다.
 ### BeanFactory 와 ApplicationContext
@@ -47,3 +49,18 @@
 - ApplicationContext 는 빈 관리 기능 + `편리한 부가 기능`을 제공
 - BeanFactory 를 직접 사용할 일은 거의 없다. 부가기능이 포함된 ApplicationContext 를 사용한다.
 - BeanFactory 나 ApplicationContext 를 `스프링 컨테이너`라 한다.
+
+## 다양한 설정 형식 지원 - 자바 코드, XML 
+- 스프링 컨테이너는 다양한 형식의 설정 정보를 받아드릴 수 있게 유연하게 설계되어 있다.
+  - 자바 코드, XML, Groovy 등등
+### 애노테이션 기반 자바 코드 설정 사용
+- 지금까지 했던 것
+- `new AnnotationConfigApplicationContext(Appconfig.class)`
+- `AnnotationConfigApplicationContext` 클래스를 사용하면서 자바 코드로 된 설정 정보를 넘기면 된다.
+### XML 설정 사용
+- 최근에는 스프링 부트를 많이 사용하면서 XML 기반의 설정은 잘 사용하지 않는다.
+- 아직 많은 레거시 프로젝트들이 XML 로 되어 있고, 
+- 또 XML을 사용하면 `컴파일 없이` 빈 설정 정보를 변경 할 수 있는 장점도 있으므로 한 번쯤 배워두는 것도 괜찮다.
+- `GenericXmlApplicationContext` 를 사용하면서 xml 설정 파일을 넘기면 된다.
+- xml 기반의 `appConfig.xml` 스프링 설정 정보와 자바 코드로 된 `AppConfig.java` 설정 정보를 비교해보면 거의 비슷하다는 것을 알 수 있다.
+- xml 기반으로 설정하는 것은 최근에 잘 사용하지 않으므로 이정도로 마무리
