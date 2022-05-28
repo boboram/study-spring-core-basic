@@ -60,3 +60,10 @@
   - @Bean memberService -> new MemoryMemberRepository()
   - @Bean orderService -> new MemoryMemberRepository()
   - 싱글톤이 안깨지나? => `ConfigurationSingletonTest`
+
+# @Configuration 과 바이트코드 조작의 마법
+- 스프링 컨테이너는 싱글톤 레지스트리다. 따라서 스프링 빈이 싱글톤이 되도록 보장해줘야 한다. 그런데 스프링이 자바 코드까지 어떻게 하기는 어렵다. 분명 memberRepository가 3번 호출돼야 하는게 맞는데...
+- 그래서 스프링은 클래스의 바이트코드를 조작하는 라이브러리를 사용한다.
+- 모든 비밀은 `@Configuration` 을 적용한 `AppConfig` 에 있다.
+  - `ConfigurationSingletonTest@configurationDeep` : 스프링이 CGLIB 라는 바이트코드 조작 라이브러리를 사용해서 AppConfig 클래스를 상속받은 임의의 다른 클래스를 만들고, 그 다른 클래스를 스프링 빈으로 등록한 것! 
+- `@Configuration` 을 명시안하면 싱글톤 보장 X => 크게 고민하지 말고 스프링 설정 정보엔 항상 `@Configuration`을 사용하자.
