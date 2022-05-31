@@ -40,3 +40,21 @@
   - `@Configuration` : 스프링 설정 정보에서 사용 
 - 사실 애노테이션은 상속 관계라는 것이 없다. 그래서 이렇게 애노테이션이 특정 애노테이션을 들고 있는 것을 인식할 수 있는 것은 자바 언어가 지원하는 기능은 아니고, 스프링이 지원하는 기능 
 
+## 필터 
+- `ComponentFilterAppConfigTest`
+  - `includeFilters` 에 `MyIncludeComponent` 애노테이션을 추가해서 BeanA 가 스프링 빈에 등록
+  - `excludeFilters` 에 `MyExcludeComponent` 애노테이션을 추가해서 BeanB 가 스프링 빈에 등록되지 않는다. 
+
+### Filter Type 옵션 
+- ANNOTATION: 기본값, 애노테이션을 인식해서 동작 
+  - ex) org.example.SomeAnnotation  
+- ASSIGNABLE_TYPE: 지정한 타입과 자식 타입을 인식해서 동작 
+  - ex) org.example.SomeClass
+- ASPECTJ: AspectJ 패턴 사용 
+  - ex) org.example.*Service+  
+- REGEX : 정규 표현식 
+  - ex) org\.example\.Default.* 
+- CUSTOM : TypeFilter 라는 인터페이스를 구현해서 처리 
+  - ex) org.example.MyTypeFilter
+
+- 옵션을 변경하면서 사용하기 보다는 스프링의 기본 설정에 최대한 맞추어 사용하는 것을 권장 
