@@ -51,3 +51,21 @@
 - `@Lombok` 
 - `@RequiredArgsConstructor` : final 이 붙은 필드를 모아서 생성자를 자동으로 만들어 줌
 - 최근에는 생성자를 딱 1개 두고, `@Autowired`를 생략하는 방법을 주로 사용한다. 여기에 Lombok 라이브러리의 `@RequiredArgsConstructor`를 함께 사용하면 기능은 다 제공하면서, 코드는 깔끔하게 사용할 수 있다. 
+
+## 조회 빈이 2개 이상 - 문제 
+- 이름만 다르고, 완전히 똑같은 타입의 스프링 빈이 2개 있을 때 
+
+### @Autowired 필드명, @Qualifier, @Primary
+- @Autowired 필드명
+  - 타입매칭 
+  - 타입 매칭의 결과가 2개 이상일 때 필드 명, 파라미터 명으로 빈 이름 매칭 
+- @Qualifier 
+  - 구분자를 붙여주는 방법 
+  - 빈 이름 변경하는 것이 아님 
+  - `@Qualifier("mainDiscountPolicy")`
+  - 정리
+    1. `@Qualifier`끼리 매칭 
+    2. 빈 이름 매칭 
+    3. `NoSuchBeanDefinitionException`예외 발생 
+- @Primary 사용 
+  - `@Primary` 우선권 지정 
