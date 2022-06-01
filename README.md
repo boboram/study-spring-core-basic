@@ -22,3 +22,12 @@
   - 아무 메서드에나 `@Autowired` 사용 가능  
   - 스프링 빈이어야 동작 
 
+## 옵션 처리 
+- `@Autowired`만 사용하면 `required` 옵션의 기본값이 `true`로 되어 있어서 자동 주입 대상이 없으면 오류 발생
+- 자동 주입 대상 옵션으로 처리하는 방법 
+  - `@Autowired(required=false)`: 자동 주입 대상이 없으면 수정자 메서드 자체가 호출 X
+  - `org.springframework.lang.@Nullable`: 자동 주입할 대상이 없으면 null 이 입력 
+  - `Optional<>`: 자동 주입 대상이 없으면 `Optional.empty`가 입력 
+- `AutowiredTest`
+  - Member는 스프링 빈이 아니다.
+  - `setNoBean1()`은 `@Autowired(required=false)`이므로 호출 자체가 안된다. 
