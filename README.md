@@ -69,3 +69,6 @@
     3. `NoSuchBeanDefinitionException`예외 발생 
 - @Primary 사용 
   - `@Primary` 우선권 지정 
+
+## 애노테이션 직접 만들기 
+- 스프링이 제공하는 기능을 뚜렷한 목적 없이 무분별하게 재정의하는 것은 유지보수에 더 혼란만 가중할 수 있다.
