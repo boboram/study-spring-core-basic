@@ -72,3 +72,10 @@
 
 ## 애노테이션 직접 만들기 
 - 스프링이 제공하는 기능을 뚜렷한 목적 없이 무분별하게 재정의하는 것은 유지보수에 더 혼란만 가중할 수 있다.
+
+## 조회한 빈이 모두 필요할 때, List, Map 
+- `AllBeanTest` 
+- 주입 분석
+  - `Map<String, DiscountPolicy>`: map 의 키에 스프링 빈의 이름을 넣어주고, 그 값으로 `DiscountPolicy` 타입으로 조회한 모든 스프링 빈을 담아준다.
+  - `List<DiscountPolicy>`: `DiscountPolicy` 타입으로 조회한 모든 스프링 빈을 담아준다.
+  - 만약 해당하는 타입의 스프링 빈이 없으면, 빈 컬렉션이나 Map 을 주입한다. 
