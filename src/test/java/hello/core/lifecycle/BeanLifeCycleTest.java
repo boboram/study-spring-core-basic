@@ -11,16 +11,15 @@ public class BeanLifeCycleTest {
     @Test
     public void lifeCycleTest() {
         //AnnotationConfigApplicationContext 의 상위 인터페이스
-        System.out.println("의존성 주입 전");
         ConfigurableApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
-        System.out.println("의존성 주입 후");
         NetworkClient client = ac.getBean(NetworkClient.class);
         ac.close();
     }
 
     @Configuration
     static class LifeCycleConfig {
-        @Bean(initMethod = "init", destroyMethod = "close")
+
+        @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
