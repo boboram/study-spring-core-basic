@@ -47,4 +47,16 @@
 ## 웹 스코프 
 - 웹 환경에서만 동작 
 - 스코프의 종료시점까지 관리 -> 종료 메서드 호출 
-- HTTP request 요청 당 각각 할당되는 request 스코프 
+- HTTP request 요청 당 각각 할당되는 request 스코프  
+
+## request 스코프 예제 만들기
+- `implementation 'org.springframework.boot:spring-boot-starter-web'` 추가 
+  - 내장 톰켓 서버를 활용해서 웹 서버와 스프링을 함께 실행 
+
+### request 스코프 예제 개발 
+- `MyLogger`
+  - 동시에 여러 HTTP 이 온 경우 구분하기 위함 
+    - 기대 포멧 [UUID][requestURL][message] 
+  - myLogger 는 HTTP 요청 당 각각 구분되므로 다른 HTTP 요청 때문에 값이 섞이는 걱정은 하지 않아도 됨 
+  - 실행시점시 오류 발생
+    - request 스코프 빈은 아직 생성되지 않았다(고객의 요청이 와야 생성 가능하다)
