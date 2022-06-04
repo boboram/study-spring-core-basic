@@ -60,3 +60,6 @@
   - myLogger 는 HTTP 요청 당 각각 구분되므로 다른 HTTP 요청 때문에 값이 섞이는 걱정은 하지 않아도 됨 
   - 실행시점시 오류 발생
     - request 스코프 빈은 아직 생성되지 않았다(고객의 요청이 와야 생성 가능하다)
+- `ObjectProvider` 덕분에 `ObjectProvider.getObject()`를 호출하는 시점까지 request scope 빈의 생성을 지연 가능 
+  - `ObjectProvider.getObject()` 호출 시점에는 HTTP 요청이 진행중이므로 request scope 빈의 생성이 정상 처리 
+  - `ObjectProvider.getObject()`를 LogDemoController, LogDemoService 에서 각각 한번씩 따로 호출해도 **같은 HTTP 요청이면 같은 스프링 빈이 반환** 
